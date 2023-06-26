@@ -1,7 +1,13 @@
+//Equipe: 
+//Davi Alves Pedroso.
+//Diogo Sagiorato.
+//Gabriel Bittencourt.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+#include <windows.h>//Usamos essa biblioteca para deixar os textos do terminal colorido :-)
+//por isso a alguns metodos estranhos no codigo, mas sao visuais.
 
 struct site {
     char nome[100];
