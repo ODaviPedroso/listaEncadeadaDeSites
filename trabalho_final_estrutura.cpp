@@ -23,10 +23,10 @@ void insereSite( site** lista, const char* nome, const char* link) {
     *lista = novo;
 }
 
-void buscaNome(struct site* lista, const char* nome,  site** site_encontrado) {
+void buscaNome(struct site* lista, const char* nome,  site** siteEncontrado) {
     while (lista != NULL) {
         if (strcmp(lista->nome, nome) == 0) {
-            *site_encontrado = lista;
+            *siteEncontrado = lista;
             return;
         }
         lista = lista->proximo;
@@ -34,10 +34,10 @@ void buscaNome(struct site* lista, const char* nome,  site** site_encontrado) {
     printf("\nSite nao encontrado.\n");
 }
 
-void buscaLink(struct site* lista, const char* link,  site** site_encontrado) {
+void buscaLink(struct site* lista, const char* link,  site** siteEncontrado) {
     while (lista != NULL) {
         if (strcmp(lista->link, link) == 0) {
-            *site_encontrado = lista;
+            *siteEncontrado = lista;
             return;
         }
         lista = lista->proximo;
@@ -59,15 +59,15 @@ void buscaGeral(struct site* lista) {
     }
 }
 
-void mover_para_primeira_posicao(struct site** lista, struct site* site_encontrado) {
-    if (*lista == site_encontrado) {
+void moverParaPrimeiraPosicao(struct site** lista, struct site* siteEncontrado) {
+    if (*lista == siteEncontrado) {
         return;
     }
 
     struct site* anterior = NULL;
     struct site* atual = *lista;
 
-    while (atual != NULL && atual != site_encontrado) {
+    while (atual != NULL && atual != siteEncontrado) {
         anterior = atual;
         atual = atual->proximo;
     }
@@ -77,8 +77,8 @@ void mover_para_primeira_posicao(struct site** lista, struct site* site_encontra
     }
 
     anterior->proximo = atual->proximo;
-    site_encontrado->proximo = *lista;
-    *lista = site_encontrado;
+    siteEncontrado->proximo = *lista;
+    *lista = siteEncontrado;
 }
 
 int main() {
@@ -104,7 +104,7 @@ int main() {
             struct site* site_encontrado = NULL;
             buscaNome(lista, nome, &site_encontrado);
             if (site_encontrado != NULL) {
-                mover_para_primeira_posicao(&lista, site_encontrado);
+                moverParaPrimeiraPosicao(&lista, site_encontrado);
                 SetConsoleTextAttribute(hConsole,  FOREGROUND_GREEN);
                 printf("Site encontrado:\n");
                 printf("Nome: %s\n", site_encontrado->nome);
@@ -119,7 +119,7 @@ int main() {
             struct site* site_encontrado = NULL;
             buscaLink(lista, link, &site_encontrado);
             if (site_encontrado != NULL) {
-                mover_para_primeira_posicao(&lista, site_encontrado);
+                moverParaPrimeiraPosicao(&lista, site_encontrado);
                 SetConsoleTextAttribute(hConsole,  FOREGROUND_GREEN);
                 printf("Site encontrado:\n");
                 printf("Nome: %s\n", site_encontrado->nome);
